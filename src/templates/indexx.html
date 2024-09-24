@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location App</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #87CEFA, #f7d794); /* Blue and Yellow gradient */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for the app */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* App box styling */
+        .app {
+            background-color: #f7f9fc; /* Light grey background for contrast */
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Main title styling */
+        .app h1 {
+            font-size: 32px;
+            color: #4A90E2; /* Blue color for main title */
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        .app form {
+            display: flex;
+            flex-direction: column; /* Stack inputs vertically */
+            align-items: center;
+        }
+
+        /* Label styling */
+        .app label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+            width: 80%; /* To align with the input width */
+        }
+
+        /* Input styling */
+        .app input {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            width: 80%;
+            margin-bottom: 15px; /* Add margin to separate inputs */
+        }
+
+        /* Button styling */
+        .app button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #F5B041; /* Orange/yellow color */
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .app button:hover {
+            background-color: #f39c12; /* Darker yellow on hover */
+        }
+
+        /* Responsive layout for smaller screens */
+        @media (max-width: 768px) {
+            .app {
+                max-width: 100%;
+                padding: 20px;
+            }
+
+            .app input {
+                font-size: 14px;
+            }
+
+            .app button {
+                font-size: 14px;
+            }
+
+            .app label {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="app">
+            <h1>Welcome to the Location App</h1>
+            <form action="/store_location" method="post">
+                <label for="latitude">Latitude:</label>
+                <input type="text" id="latitude" name="latitude" required>
+                <label for="longitude">Longitude:</label>
+                <input type="text" id="longitude" name="longitude" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
