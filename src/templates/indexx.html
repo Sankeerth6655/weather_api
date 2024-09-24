@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Weather Forecast App{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Location App</title>
     <style>
-        /* General styles */
+        /* General body styling */
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom right, #87CEFA, #f7d794); /* Blue and Yellow gradient */
@@ -19,7 +19,7 @@
             align-items: center;
         }
 
-        /* Container for the weather app */
+        /* Container for the app */
         .container {
             display: flex;
             justify-content: center;
@@ -27,8 +27,8 @@
             width: 100%;
         }
 
-        /* Weather app box styling */
-        .weather-app {
+        /* App box styling */
+        .app {
             background-color: #f7f9fc; /* Light grey background for contrast */
             border-radius: 15px;
             padding: 30px;
@@ -39,27 +39,41 @@
         }
 
         /* Main title styling */
-        .weather-app h1 {
+        .app h1 {
             font-size: 32px;
             color: #4A90E2; /* Blue color for main title */
             margin-bottom: 20px;
         }
 
         /* Form styling */
-        .weather-app form {
-            margin-bottom: 20px;
+        .app form {
+            display: flex;
+            flex-direction: column; /* Stack inputs vertically */
+            align-items: center;
         }
 
-        .weather-app input {
+        /* Label styling */
+        .app label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+            width: 80%; /* To align with the input width */
+        }
+
+        /* Input styling */
+        .app input {
             padding: 10px 15px;
             font-size: 16px;
             border: 2px solid #ddd;
             border-radius: 10px;
-            width: 70%;
-            margin-right: 10px;
+            width: 80%;
+            margin-bottom: 15px; /* Add margin to separate inputs */
         }
 
-        .weather-app .btn {
+        /* Button styling */
+        .app button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #F5B041; /* Orange/yellow color */
@@ -68,72 +82,47 @@
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin-top: 15px; /* Add margin to move the button down */
         }
 
-        .weather-app .btn:hover {
+        .app button:hover {
             background-color: #f39c12; /* Darker yellow on hover */
-        }
-
-        /* Weather information section styling */
-        .weather-info {
-            margin-top: 20px;
-            text-align: left;
-            background: #e3f2fd; /* Light blue background */
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .weather-info h2 {
-            color: #4A90E2;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        /* Info paragraph styling */
-        .weather-info p {
-            font-size: 18px;
-            margin: 10px 0;
-            color: #333;
-        }
-
-        /* Icons with weather info */
-        .weather-info i {
-            margin-right: 10px;
-            color: #F5B041; /* Orange color for the icons */
-        }
-
-        /* Error message styling */
-        .error-message {
-            color: red;
-            margin-top: 20px;
-            font-size: 18px;
         }
 
         /* Responsive layout for smaller screens */
         @media (max-width: 768px) {
-            .weather-app {
+            .app {
                 max-width: 100%;
                 padding: 20px;
             }
 
-            .weather-info p {
+            .app input {
+                font-size: 14px;
+            }
+
+            .app button {
+                font-size: 14px;
+            }
+
+            .app label {
                 font-size: 16px;
             }
         }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #333;
-        }
     </style>
 </head>
+
 <body>
     <div class="container">
-        {% block content %}{% endblock %}
+        <div class="app">
+            <h1>Welcome to the Location App</h1>
+            <form action="/store_location" method="post">
+                <label for="latitude">Latitude:</label>
+                <input type="text" id="latitude" name="latitude" required>
+                <label for="longitude">Longitude:</label>
+                <input type="text" id="longitude" name="longitude" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
-    <footer>
-        <p>Your weather app to get data easily!</p>
-    </footer>
 </body>
+
 </html>

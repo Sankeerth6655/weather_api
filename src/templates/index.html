@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Forecast App</title>
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMjvG/2fwL85bqlV6j5MSW4m4zt27t8Vn4Qk4xk" crossorigin="anonymous">
     <style>
         /* General body styling */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom right, #87CEFA, #f7d794); /* Blue and Yellow gradient */
+            background: linear-gradient(to bottom right, #87CEFA, #f7d794); /* Blue to yellow gradient */
             color: #333;
             margin: 0;
             padding: 0;
@@ -22,142 +21,183 @@
             align-items: center;
         }
 
-        /* Container for the weather app */
+        /* Container styling */
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        /* Weather app box styling */
-        .weather-app {
-            background-color: #f7f9fc; /* Light grey background for contrast */
+            background-color: #f7f9fc;
             border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-            max-width: 450px;
-            width: 100%;
+            padding: 20px; /* Reduced padding */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+            max-width: 800px; /* Increased max-width to 800px */
+            width: 90%;
             text-align: center;
         }
 
-        /* Main title styling */
-        .weather-app h1 {
-            font-size: 32px;
-            color: #4A90E2; /* Blue color for main title */
-            margin-bottom: 20px;
-        }
-
-        /* Form styling */
-        .weather-app form {
-            margin-bottom: 20px;
-        }
-
-        .weather-app input {
-            padding: 10px 15px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            width: 70%;
-            margin-right: 10px;
-        }
-
-        .weather-app .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #F5B041; /* Orange/yellow color */
-            border: none;
-            border-radius: 10px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 15px; /* Add margin to move the button down */
-        }
-
-        .weather-app .btn:hover {
-            background-color: #f39c12; /* Darker yellow on hover */
-        }
-
-        /* Weather information section styling */
-        .weather-info {
-            margin-top: 20px;
-            text-align: left;
-            background: #e3f2fd; /* Light blue background */
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .weather-info h2 {
+        h1 {
+            font-size: 28px; /* Reduced font size */
             color: #4A90E2;
-            font-size: 24px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
 
-        /* Info paragraph styling */
-        .weather-info p {
-            font-size: 18px;
+        p {
+            font-size: 16px; /* Reduced font size */
             margin: 10px 0;
             color: #333;
         }
 
-        /* Icons with weather info */
-        .weather-info i {
-            margin-right: 10px;
-            color: #F5B041; /* Orange color for the icons */
+        label {
+            font-size: 16px; /* Reduced label font size */
+            color: #4A90E2;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Input styling */
+        input[type="text"] {
+            padding: 8px 12px; /* Reduced padding */
+            font-size: 14px; /* Reduced input font size */
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 75%; /* Adjusted width */
+            margin-bottom: 15px;
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 25px; /* Reduced padding */
+            font-size: 16px; /* Slightly smaller button text */
+            border: none;
+            border-radius: 20px;
+            background-color: #ff7f50; /* Changed to orange */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background-color: #ff6347; /* Darker orange on hover */
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3); /* Softer hover effect */
         }
 
         /* Error message styling */
         .error-message {
             color: red;
-            margin-top: 20px;
-            font-size: 18px;
+            font-size: 16px; /* Slightly smaller error message */
+            margin-top: 15px;
         }
 
-        /* Responsive layout for smaller screens */
+        /* Weather info section */
+        .weather-info {
+            margin-top: 15px;
+            padding: 15px; /* Reduced padding */
+            background: #e3f2fd;
+            border-radius: 10px; /* Reduced border-radius */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center text alignment */
+        }
+
+        .weather-info p {
+            font-size: 16px; /* Slightly smaller weather info font size */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center items horizontally */
+            align-items: center; /* Center items vertically */
+        }
+
+        .weather-info i {
+            margin-right: 8px;
+            color: #FF6347; /* Icon color */
+        }
+
+        /* Weather icon styling */
+        img {
+            margin-top: 15px;
+            border-radius: 10px;
+            border: 2px solid #4A90E2;
+            max-width: 100px; /* Set a max width for the image */
+            display: block; /* Center image */
+            margin-left: auto; /* Center image */
+            margin-right: auto; /* Center image */
+        }
+
+        /* Link styling */
+        a {
+            display: block;
+            color: #4A90E2;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            margin: 10px 0; /* Add spacing between links */
+        }
+
+        a:hover {
+            color: #FF6347;
+        }
+
+        /* Responsive styling */
         @media (max-width: 768px) {
-            .weather-app {
-                max-width: 100%;
-                padding: 20px;
+            .container {
+                max-width: 95%; /* Adjusted for smaller screens */
+                padding: 15px; /* Reduced padding for mobile */
+            }
+
+            h1 {
+                font-size: 22px; /* Adjusted for smaller screens */
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+                padding: 8px 15px;
             }
 
             .weather-info p {
-                font-size: 16px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
+
 <body>
-
     <div class="container">
-        <div class="weather-app">
-            <h1>Weather Forecast</h1>
-            <form method="POST">
-                <input type="text" name="city" placeholder="Enter city" required>
-                <button type="submit" class="btn">Get Weather</button>
-            </form>
+        <h1>Weather Information</h1>
+        
+        <form method="POST" action="/">
+            <label for="city">Enter City:</label>
+            <input type="text" id="city" name="city" placeholder="e.g. New York" required>
+            <button type="submit">Get Weather</button>
+        </form>
 
-            <!-- Display error message if the city is invalid -->
-            {% if error_message %}
-            <div class="error-message">
-                {{ error_message }}
-            </div>
-            {% endif %}
-
-            <!-- Display weather information if available -->
-            {% if weather_data %}
-            <div class="weather-info">
-                <h2>Weather in {{ weather_data['location'] }}</h2>
-                <p><i class="fas fa-thermometer-half"></i> Temperature: {{ weather_data['temp'] }} °C</p>
-                <p><i class="fas fa-cloud"></i> Clouds: {{ weather_data['clouds'] }}</p>
-                <p><i class="fas fa-tint"></i> Humidity: {{ weather_data['humidity'] }}%</p>
-                <p><i class="fas fa-compress-arrows-alt"></i> Pressure: {{ weather_data['pressure'] }} hPa</p>
-                <p><i class="fas fa-map-marker-alt"></i> Latitude: {{ weather_data['lat'] }}</p>
-                <p><i class="fas fa-map-marker-alt"></i> Longitude: {{ weather_data['lon'] }}</p>
-                <p><i class="fas fa-sun"></i> UV Index: {{ weather_data['uv_index'] }}</p>
-            </div>
-            {% endif %}
+        {% if weather_data %}
+        <div class="weather-info">
+            <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{ weather_data['location'] }}</p>
+            <p><i class="fas fa-temperature-high"></i> <strong>Temperature:</strong> {{ weather_data['temp'] }} °C</p>
+            <p><i class="fas fa-cloud"></i> <strong>Clouds:</strong> {{ weather_data['clouds'] }}</p>
+            <p><i class="fas fa-tint"></i> <strong>Humidity:</strong> {{ weather_data['humidity'] }}%</p>
+            <p><i class="fas fa-gauge"></i> <strong>Pressure:</strong> {{ weather_data['pressure'] }} hPa</p>
+            <p><i class="fas fa-wind"></i> <strong>Wind Speed:</strong> {{ weather_data['wind_speed'] }} m/s</p>
+            <p><i class="fas fa-sun"></i> <strong>UV Index:</strong> {{ weather_data['uv_index'] }}</p>
+            <p><i class="fas fa-sunrise"></i> <strong>Sunrise:</strong> {{ weather_data['sunrise'] }}</p>
+            <p><i class="fas fa-sunset"></i> <strong>Sunset:</strong> {{ weather_data['sunset'] }}</p>
+            <p><i class="fas fa-map-marked-alt"></i> <strong>Latitude:</strong> {{ weather_data['lat'] }}</p>
+            <p><i class="fas fa-map-marked-alt"></i> <strong>Longitude:</strong> {{ weather_data['lon'] }}</p>
+            <img src="http://openweathermap.org/img/wn/{{ weather_data.icon }}@2x.png" alt="Weather icon">
         </div>
+        {% else %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+        
+        <a href="/store_location">Search by Latitude and Longitude</a>
+        <a href="/locations_by_climate">Find the Best Climate for You!</a>
     </div>
 
 </body>
+
 </html>
