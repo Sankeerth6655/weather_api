@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Preferences</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            width: 500px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #0072ff;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .btn-submit {
+            background-color: #0072ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        
+        .btn-submit:hover {
+            background-color: #005fcc;
+        }
+        
+        .results {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .results.visible {
+            display: block;
+        }
+        
+        .results h3 {
+            color: #0072ff;
+            margin-bottom: 10px;
+        }
+        
+        .results p {
+            font-size: 1.1rem;
+        }
+        
+        .loading {
+            display: none;
+            color: #0072ff;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Preferences</h1>
+        
+        <div class="form-group">
+            <label for="weatherPref">Select Weather Condition</label>
+            <select id="weatherPref">
+                <option value="">--Select Weather--</option>
+                <option value="overcast clouds">Overcast Clouds</option>
+                <option value="clear sky">Clear Sky</option>
+                <option value="light rain">Light Rain</option>
+                <option value="haze">Haze</option>
+                <option value="thunderstorm with light rain">Thunderstorm with Light Rain</option>
+            </select>
+        </div>
+
+        <button class="btn-submit" onclick="getWeatherData()">Get Weather Info</button>
+
+        <div class="loading" id="loadingText">Loading...</div>
+        
+        <div class="results" id="resultsSection">
+            <h3>Weather Information</h3>
+            <p id="weatherInfo"></p>
+        </div>
+    </div>
+
+    <script>
+        async function getWeatherData() {
+            const selectedWeather = document.getElementById('weatherPref').value;
+            const loadingText = document.getElementById('loadingText');
+            const resultsSection = document.getElementById('resultsSection');
+            const weatherInfo = document.getElementById('weatherInfo');
+            
+            if (!selectedWeather) {
+                alert("Please select a weather condition!");
+                return;
+            }
+            
+            // Show loading text while fetching data
+            loadingText.style.display = 'block';
+            resultsSection.classList.remove('visible');
+            
+            try {
+                // Fetch data from the API
+                const response = await fetch(`/get-location?weather=${encodeURIComponent(selectedWeather)}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                // Hide loading text and show results
+                loadingText.style.display = 'none';
+                resultsSection.classList.add('visible');
+                
+                // Prepare and display the result
+                weatherInfo.innerHTML = data.map(location => `
+                    Location: ${location.name}<br>
+                    Latitude: ${location.latitude}<br>
+                    Longitude: ${location.longitude}<br>
+                    Temperature: ${location.temperature}°C
+                `).join('<hr>');
+                
+            } catch (error) {
+                loadingText.style.display = 'none';
+                alert(error.message);
+            }
+        }
+    </script>
+</body>
+</html>
