@@ -56,3 +56,5 @@ def get_location_by_weather():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
